@@ -1,0 +1,121 @@
+================================================================================
+                    SIMPLE ARCHITECTURE DIAGRAM
+                    (Easy to draw/explain in 4 minutes)
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────┐
+│                         USER BROWSER                            │
+│                    (What User Sees)                             │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │    Home      │  │   Student    │  │  Instructor   │         │
+│  │  (Select     │  │    View      │  │    View       │         │
+│  │   Role)      │  │              │  │              │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+│                                                                 │
+│  All pages use: api.js → Makes HTTP requests                   │
+└───────────────────────┬─────────────────────────────────────────┘
+                        │
+                        │ HTTP Requests (GET, POST, PATCH)
+                        │ JSON Data
+                        │
+┌───────────────────────▼─────────────────────────────────────────┐
+│                      DJANGO BACKEND                              │
+│                   (Business Logic)                               │
+│                                                                 │
+│  Receives Request → Validates → Saves to DB → Returns JSON     │
+│                                                                 │
+│  API Endpoints:                                                  │
+│  - /api/courses/                                                 │
+│  - /api/chapters/                                                │
+│  - /api/enrollments/                                             │
+└───────────────────────┬─────────────────────────────────────────┘
+                        │
+                        │ SQL Queries
+                        │
+┌───────────────────────▼─────────────────────────────────────────┐
+│                      SQLITE DATABASE                             │
+│                      (Data Storage)                              │
+│                                                                 │
+│  Tables:                                                         │
+│  - Courses                                                       │
+│  - Chapters (with visibility: public/private)                   │
+│  - Enrollments                                                   │
+│  - Users                                                         │
+└──────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                        EXAMPLE FLOW
+================================================================================
+
+Student Joins Course:
+
+1. Student clicks "Join Course" button
+   │
+   ▼
+2. React component calls: createEnrollment()
+   │
+   ▼
+3. api.js sends: POST /api/enrollments/
+   │
+   ▼
+4. Django receives request
+   │
+   ▼
+5. Validates data → Saves enrollment to database
+   │
+   ▼
+6. Returns JSON: {id: 1, success: true}
+   │
+   ▼
+7. Frontend shows: "Successfully joined course!"
+
+Instructor Creates Chapter:
+
+1. Instructor fills form with title, content (rich text), visibility
+   │
+   ▼
+2. React component calls: createChapter()
+   │
+   ▼
+3. api.js sends: POST /api/chapters/
+   │
+   ▼
+4. Django receives request
+   │
+   ▼
+5. Validates data → Saves chapter to database
+   │
+   ▼
+6. Returns JSON response
+   │
+   ▼
+7. Frontend shows: "Chapter created successfully!"
+
+================================================================================
+                        KEY CONCEPTS
+================================================================================
+
+FRONTEND (React):
+- Shows UI to user
+- Handles user interactions
+- Makes API calls
+- Rich text editor for chapter content
+
+BACKEND (Django):
+- Processes requests
+- Validates data
+- Saves to database
+- Filters chapters by visibility
+
+DATABASE (SQLite):
+- Stores all data
+- Tables: Courses, Chapters, Enrollments, Users
+- Chapters have visibility field (public/private)
+
+COMMUNICATION:
+- HTTP requests (GET, POST, PATCH)
+- JSON format
+- REST API standard
+
+================================================================================
