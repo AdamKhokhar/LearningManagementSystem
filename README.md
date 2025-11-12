@@ -60,10 +60,8 @@ npm run dev
 ### Instructor Capabilities
 - Create and manage courses
 - Create chapters within a course
-- Use rich text editor (React Quill) for creating and editing chapter content
-- Set chapter visibility (public or private)
 
 ### Student Capabilities
 - View list of available courses
 - Join courses created by instructors
-- Access and read chapters marked as public by instructors
+- Access and read chapters
