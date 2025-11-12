@@ -44,12 +44,7 @@ npm run dev
 
 ## Default Users
 
-All accounts use password: **password**
-
-- **admin** / password (admin panel access)
-- **teacher** / password (frontend only)
-- **student1** / password (frontend only)
-- **student2** / password (frontend only)
+- **admin** / password is "password"
 
 ## How to Use
 
